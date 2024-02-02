@@ -30,6 +30,7 @@ body {
 .content {
     min-height: calc(100vh - 6rem);
     display: flex;
+    flex-direction: column;
     justify-content: center;
     align-items: center;
     
@@ -48,6 +49,17 @@ body {
         justify-content: center;
         align-items: center;
         font-size: 2rem;
+    }
+    
+    .cell:hover {
+        background-color: var(--color-400);
+    }
+    
+    #status {
+        margin-top: 2rem;
+        span {
+            font-size: 1.3rem;
+        }
     }
 }
 

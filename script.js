@@ -8,6 +8,7 @@ const gameboard = (function () {
     
     let movesLeft = 9;
     let currentPlayer = null;
+    const status = document.getElementById('status');
 
     const setPlayer = (player) => {
         currentPlayer = player;
@@ -21,7 +22,15 @@ const gameboard = (function () {
                 cell.textContent = board[i][j];
             }
         }
-    }
+    };
+    
+    const updatePlayerTurn = (player) => {
+        status.textContent = `${player.name}'s turn`;
+    };
+    
+    const announceWinner = (player) => {
+        status.textContent = `${player.name} wins!`;
+    };
     
     const play = (row, column) => {
         if (movesLeft === 0) {
@@ -32,11 +41,13 @@ const gameboard = (function () {
             board[row][column] = currentPlayer.marker;
             updateBoard();
             if (checkWinner()) {
+                announceWinner(currentPlayer);
                 console.log(`${currentPlayer.name} wins!`);
                 movesLeft = 0;
                 return;
             }
             currentPlayer = currentPlayer === player1 ? player2 : player1;
+            updatePlayerTurn(currentPlayer);
             movesLeft--;
         } else {
             console.log('Invalid move');
@@ -45,7 +56,6 @@ const gameboard = (function () {
         if (movesLeft === 0) {
             console.log('Game over');
         }
-        console.log(board);
     };
     
     const checkWinner = () => {
