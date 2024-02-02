@@ -1,6 +1,6 @@
 // Immediately Invoked Function Expression using module pattern.
 const gameboard = (function () {
-    const board = [
+    let board = [
         ['','',''],
         ['','',''],
         ['','','']
@@ -24,6 +24,24 @@ const gameboard = (function () {
         }
     };
     
+    const resetBoard = () => {
+        board = [
+            ['','',''],
+            ['','',''],
+            ['','','']
+        ]
+        
+        movesLeft = 9;
+        currentPlayer = player1;
+        updateBoard();
+        updatePlayerTurn(currentPlayer);
+    };
+
+    const resetButton = document.getElementById('reset');
+    resetButton.addEventListener('click', () => {
+        resetBoard();
+    });
+
     const updatePlayerTurn = (player) => {
         status.textContent = `${player.name}'s turn`;
     };
