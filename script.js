@@ -13,6 +13,16 @@ const gameboard = (function () {
         currentPlayer = player;
     };
     
+    const updateBoard = () => {
+        for (let i = 0; i < 3; i++) {
+            for (let j = 0; j < 3; j++) {
+                // Use i + 1 and j + 1 as nth child is 1-indexed
+                const cell = document.querySelector(`#board > div:nth-child(${i + 1}) > div:nth-child(${j + 1})`);
+                cell.textContent = board[i][j];
+            }
+        }
+    }
+    
     const play = (row, column) => {
         if (movesLeft === 0) {
             return;
@@ -20,6 +30,7 @@ const gameboard = (function () {
 
         if (board[row][column] === '') {
             board[row][column] = currentPlayer.marker;
+            updateBoard();
             if (checkWinner()) {
                 console.log(`${currentPlayer.name} wins!`);
                 movesLeft = 0;
@@ -62,7 +73,18 @@ const gameboard = (function () {
     const getBoard = () => board;
 
     const render = () => {
-        // TODO: display colums and rows
+        const boardElement = document.getElementById('board');
+        for (let i = 0; i < 3; i++) {
+            const row = document.createElement('div');
+            for (let j = 0; j < 3; j++) {
+                const cell = document.createElement('div');
+                cell.classList.add('cell');
+                cell.textContent = board[i][j];
+                cell.addEventListener('click', () => play(i, j));
+                row.appendChild(cell);
+            }
+            boardElement.appendChild(row);
+        } 
     };
 
     return {

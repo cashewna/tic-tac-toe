@@ -33,9 +33,15 @@ body {
     justify-content: center;
     align-items: center;
     
+    #board > div {
+        display: flex;
+    }
+    
     .cell {
-        padding: 1rem;
-        background-color: var(--color-100);
+        width: 10rem;
+        height: 10rem;
+        border: 1px solid var(--color-500);
+        background-color: var(--color-300);
         border-radius: 0.5rem;
         box-shadow: 0 0 1rem rgba(0, 0, 0, 0.1);
     }
